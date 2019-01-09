@@ -76,23 +76,23 @@ class Post extends Component {
                 <div className="feed-post__bottom text-center">
                     <div className="row align-items-center">
                         <div className="col">
-                            <a href="#">
+                            <button>
                                 <i className="far mr-1 fa-comment"></i>
                                 {comments} Comentarios
-                            </a>
+                            </button>
                         </div>
                         <div className="col">
-                            <a href="#"
+                            <button
                                 onClick={ this.likeAction }>
                                 <i className={"mr-1 " + ( !likeDone ? 'far fa-heart' : 'fas fa-heart' )}></i>
                                 {likes} Likes
-                            </a>
+                            </button>
                         </div>
                         <div className="col">
-                            <a href="#">
+                            <button>
                                 <i className="far mr-1 fa-share-square"></i>
                                 {shares} Shares
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

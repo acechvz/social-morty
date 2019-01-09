@@ -33,7 +33,7 @@ const Trends = () =>
         <h5 className="mb-4">Tendencias para ti</h5>
         { trends.map( trend =>
             <div className="trends-widget__item" key={ trend.trendId }>
-                <a href="#">{ trend.hashtag }</a>
+                <button>{ trend.hashtag }</button>
                 <span>{ trend.likes } likes</span>
             </div>
         )}

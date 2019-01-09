@@ -20,7 +20,9 @@
   background-color: white;
   box-shadow: 0 0 5px #f1f1f3;
   margin-bottom: 30px; }
-
+.baseLink {
+  background: none;
+  border: none;}
 .image {
   position: absolute;
   top: 30px;
@@ -92,7 +94,9 @@
   padding: 30px; }
   .trends-widget__item:not(:last-child) {
     margin-bottom: 10px; }
-  .trends-widget__item a {
+  .trends-widget__item button {
+    border: none;
+    background: none;
     color: #0092e7;
     font-weight: 500;
     display: block; }
@@ -164,6 +168,8 @@ body {
     .feed-post__bottom {
       padding: 20px 0 0;
       font-weight: 500; }
-      .feed-post__bottom a {
+      .feed-post__bottom button {
+        border: none;
+        background: none;
         color: #777777;
         display: block; }

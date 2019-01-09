@@ -77,31 +77,32 @@ class NewPost extends Component {
                             <div className="col-md-6">
                                 <ul className="list">
                                     <li>
-                                        <a href="#" title="Adjuntar imagen"> <i className="far fa-image"></i>
-                                        </a>
+                                        <button className="baseLink" title="Adjuntar imagen"> <i className="far fa-image"></i>
+                                        </button>
                                     </li>
                                     <li>
-                                        <a href="#" title="Emojis">
+                                        <button className="baseLink" title="Emojis">
                                             <i className="far fa-grin-tongue"></i>
-                                        </a>
+                                        </button>
                                     </li>
                                     <li>
-                                        <a href="#" title="Marcar como algo">
+                                        <button className="baseLink" title="Marcar como algo">
                                             <i className="far fa-flag"></i>
-                                        </a>
+                                        </button>
                                     </li>
                                     <li>
-                                        <a href="#" title="Programar publicacion">
+                                        <button className="baseLink" title="Programar publicacion">
                                             <i className="far fa-calendar-check"></i>
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
                             <div className="col-md-6 text-right">
-                                <a  href="#"
+                                <button
+                                    style={{border: 'none'}}
                                     className={"button " + ( this.charactersLeft() < 0 ? 'disabled' : '' )}
                                     onClick={ this.doPost }
-                                    >Post</a>
+                                    >Post</button>
                             </div>
                         </div>
                     </div>
