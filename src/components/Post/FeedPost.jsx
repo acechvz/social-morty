@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import classNames from 'classnames';
 class Post extends Component {
     constructor(props) {
         super(props);
@@ -10,40 +10,56 @@ class Post extends Component {
             likes: post.likes || 0,
             shares: post.shares || 0,
             comments: post.comments || 0,
-            likeDone: false,
-            shareDone: false,
-            commentDone: false
+            doLike: false,
+            doShare: false,
+            doComment: false
         };
-
-        this.likeAction = this.likeAction.bind(this);
-        this.shareAction = this.shareAction.bind(this);
-        this.commentAction = this.commentAction.bind(this);
     }
 
-    likeAction(e) {
+
+    likeAction = (e) => {
         e.preventDefault();
         if( !this.state.likeDone )
-            this.setState({
-                likes: this.state.likes + 1,
-                likeDone: true
+            this.setState((prevState) => {
+                const { likes } = prevState;
+                return {
+                    likes: likes + 1,
+                    likeDone: true
+                }
+            });
+        else 
+            this.setState((prevState) => {
+                const { likes } = prevState;
+                return {
+                    likes: likes - 1,
+                    likeDone: false
+                }
             });
     }
     
-    shareAction(e) {
+    shareAction = (e) => {
         e.preventDefault();
-        if( !this.state.shareDone )
-            this.setState({
-                shares: this.state.shares + 1,
-                shareDone: true
+        const { shareDone } = this.state;
+        if( !shareDone )
+            this.setState((prevState) => {
+                const { shares } = prevState;
+                return {
+                    shares: shares + 1,
+                    shareDone: true
+                }
             })
     }
     
-    commentAction(e) {
+    commentAction = (e) => {
         e.preventDefault();
-        if( !this.state.commentDone )
-            this.setState({
-                comments: this.state.comments + 1,
-                commentDone: true
+        const { commentDone } = this.state;
+        if( !commentDone )
+            this.setState((prevState) => {
+                const { comments } = prevState;
+                return {
+                    comments: comments + 1,
+                    commentDone: true
+                }
             })
     }
 
@@ -56,6 +72,12 @@ class Post extends Component {
                 comments } = this.state;
 
         const { post } = this.props;
+
+        const likeClasses = classNames(
+            'mr-1',
+            { "far fa-heart": !likeDone },
+            { "fas fa-heart": likeDone }
+        )
 
         return (
             <div className="feed-post">
@@ -84,7 +106,7 @@ class Post extends Component {
                         <div className="col">
                             <a href="#"
                                 onClick={ this.likeAction }>
-                                <i className={"mr-1 " + ( !likeDone ? 'far fa-heart' : 'fas fa-heart' )}></i>
+                                <i className={likeClasses}></i>
                                 {likes} Likes
                             </a>
                         </div>

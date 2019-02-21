@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { withLoading } from '../../hoc';
 import Post from './FeedPost';
 
-class FeedPosts extends Component {
+export default class FeedPosts extends Component {
     constructor(props) { 
         super(props);
     }
@@ -23,4 +24,4 @@ class FeedPosts extends Component {
     }
 }
 
-export default FeedPosts;
+export const PostsWithLoading = withLoading(FeedPosts);

@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
-
-const PATH_API = 'https://rickandmortyapi.com/api';
-const PATH_CHARACTERS = '/character';
+import { getRandomCharacters } from '../../api/follow';
 
 class Follow extends Component {
+    _isMounted = false;
     constructor(props) {
         super(props);
 
         this.state = {
             profiles: null
         }
-
-        this.setSuggestedFollow = this.setSuggestedFollow.bind(this);
-    }
-
-    setSuggestedFollow( profiles ) {
-        this.setState( { profiles } );
     }
 
     getUsername( character ) {
 		return `${character.name.toLowerCase().replace(" ","")}${character.id}`;
+    }
+
+    setSuggestedFollow( profiles ) {
+        this.setState({ profiles });
     }
     
     componentDidMount() {
@@ -31,10 +28,12 @@ class Follow extends Component {
             }
         }
         charactersIds += ']';
+        this._isMounted = true;
+        getRandomCharacters( charactersIds ).then( ({ data }) => this._isMounted && this.setState({ profiles: data }) );
+    }
 
-        fetch( `${PATH_API}${PATH_CHARACTERS}/${charactersIds}` )
-        .then( res => res.json() )
-        .then( result => this.setSuggestedFollow( result ) );
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {

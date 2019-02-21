@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import user from './../../userdata';
 
 class NewPost extends Component {
@@ -21,14 +22,15 @@ class NewPost extends Component {
     }
     
     charactersLeft(){
-        return this.state.maxCharacters - this.state.postText.length;
+        const { maxCharacters, postText } = this.state;
+        return maxCharacters - postText.length;
     }
 
     doPost(e) {
         const { doPost } = this.props;
         e.preventDefault();
 
-        if ( this.charactersLeft() < 0 ) return;
+        if ( !this.charactersLeft() ) return;
 
         let post = {
             author_image: user.image,
@@ -51,6 +53,16 @@ class NewPost extends Component {
     render() {
         const { maxCharacters, postText } = this.state;
 
+        const postTextClass = classNames(
+            'form-control',
+            { 'is-invalid': !this.charactersLeft()}
+        );
+
+        const postButtonClass = classNames(
+            'button',
+            { 'disabled': !this.charactersLeft() }
+        );
+
         // const { doPost } = this.props;
         return (
             <div className="block new-post">
@@ -62,7 +74,7 @@ class NewPost extends Component {
                             cols="30"
                             rows="10"
                             placeholder="Wubba Lubba Dub Dub!"
-                            className={ 'form-control ' + (this.charactersLeft() < 0 ? 'is-invalid' : '') }
+                            className={ postTextClass }
                             onChange={ this.onWritePost }
                             value={ postText }>
                         </textarea>
@@ -99,9 +111,9 @@ class NewPost extends Component {
                             </div>
                             <div className="col-md-6 text-right">
                                 <a  href="#"
-                                    className={"button " + ( this.charactersLeft() < 0 ? 'disabled' : '' )}
-                                    onClick={ this.doPost }
-                                    >Post</a>
+                                    className={postButtonClass}
+                                    onClick={ this.doPost }>
+                                    Post</a>
                             </div>
                         </div>
                     </div>
